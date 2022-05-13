@@ -1,0 +1,41 @@
+h2{
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-align: center;
+  }
+
+p{
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-align: center;
+ }
+
+#game-board {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+.dot {
+    border: 2px solid gray;
+    border-radius: 200px;
+    margin: 2px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    height: .25rem;
+    width: .25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    padding: 50px;
+  }
+  
+.colored-dot-red {
+    border: 2px solid red;
+  }
+.colored-dot-blue {
+    border: 2px solid blue;
+  }
+
+.number-row {
+    display: flex;
+  }
