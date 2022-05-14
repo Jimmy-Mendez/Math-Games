@@ -40,7 +40,7 @@ function chooseDot(target, dotNum){
         countShaded+=1
     }
     if(countShaded==2){
-        
+        return
     }
 }
 

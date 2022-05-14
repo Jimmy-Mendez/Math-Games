@@ -30,13 +30,6 @@ p{
     background-color: white;
   }
   
-.colored-dot-red {
-    border: 2px solid red;
-  }
-.colored-dot-blue {
-    border: 2px solid blue;
-  }
-
 .number-row {
     display: flex;
   }
