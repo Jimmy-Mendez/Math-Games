@@ -19,30 +19,51 @@ function initBoard() {
 
 initBoard();
 
-function chooseDot(dotNum){
-    return dotNum
-}
-
 var elements = document.getElementsByClassName("dot");
+
+function chooseDot(target, dotNum){
+    let oldColor = target.style.backgroundColor
+    let index = -1
+    countShaded = 0
+    for (var i = 0; i < elements.length; i++) {
+        if(elements[i].backgroundColor!='white'){
+            index = i
+            countShaded += 1
+        }
+        }
+    if (dotNum != index+6 && dotNum != index-6 && dotNum != index+1 &&dotNum != index-1 && countShaded == 0){
+            elements[index].backgroundColor='white'
+            elements[dotNum].backgroundColor='red'
+    }
+    else{
+        elements[dotNum].backgroundColor='red'
+        countShaded+=1
+    }
+    if(countShaded==2){
+        
+    }
+}
 
 for (var i = 0; i < elements.length; i++) {
     elements[i].addEventListener('click', (e) => {
         const target = e.target
-        let oldColor = target.style.backgroundColor
-        if (currentPlayer == "red"){
-            if (oldColor == 'red'){
-                target.style.backgroundColor =  'white'
-            }
-            else{
-                target.style.backgroundColor =  'red'
-            }
-        }
+        console.log(i)
     });
 }
 
-//document.getElementsByClassName("dot").addEventListener("click", (e) => {
-//    const target = e.target
-//    console.log("hi")
-//    target.classList.add("colored-red-dot")
-//})
+
+//for (var i = 0; i < elements.length; i++) {
+//    elements[i].addEventListener('click', (e) => {
+//        const target = e.target
+//        let oldColor = target.style.backgroundColor
+//        if (currentPlayer == "red"){
+//            if (oldColor == 'red'){
+//                target.style.backgroundColor =  'white'
+//            }
+//            else{
+//                target.style.backgroundColor =  'red'
+//            }
+//        }
+//    });
+//}
 
