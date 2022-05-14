@@ -21,14 +21,19 @@ initBoard();
 
 var elements = document.getElementsByClassName("dot");
 
-function chooseDot(target, dotNum){
+function chooseDot(target){
     let oldColor = target.style.backgroundColor
     let index = -1
     countShaded = 0
+    dotNum=-1
     for (var i = 0; i < elements.length; i++) {
         if(elements[i].backgroundColor!='white'){
             index = i
             countShaded += 1
+            if(target == elements[i]){
+                dotNum=i
+                }
+            }
         }
         }
     if (dotNum != index+6 && dotNum != index-6 && dotNum != index+1 &&dotNum != index-1 && countShaded == 0){
@@ -52,7 +57,7 @@ function chooseDot(target, dotNum){
 for (var i = 0; i < elements.length; i++) {
     elements[i].addEventListener('click', (e) => {
         const target = e.target
-        console.log(elements[0])
+        chooseDot(target)
     });
 }
 
