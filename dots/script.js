@@ -15,12 +15,11 @@ function initBoard() {
     }
 }
 
+initBoard();
+
 document.getElementsById("dot").addEventListener("click", (e) => {
     const target = e.target
     
     target.classList.add("colored-red-dot")
 })
 
-
-
-initBoard();
