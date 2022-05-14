@@ -35,7 +35,6 @@ function chooseDot(target){
                 }
             }
         }
-        }
     if (dotNum != index+6 && dotNum != index-6 && dotNum != index+1 &&dotNum != index-1 && countShaded == 0){
             elements[index].backgroundColor='white'
             elements[dotNum].backgroundColor='red'
