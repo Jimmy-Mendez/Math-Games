@@ -52,7 +52,7 @@ function chooseDot(target, dotNum){
 for (var i = 0; i < elements.length; i++) {
     elements[i].addEventListener('click', (e) => {
         const target = e.target
-        console.log(target)
+        console.log(elements[0])
     });
 }
 
