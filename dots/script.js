@@ -15,7 +15,7 @@ function initBoard() {
     }
 }
 
-document.getElementById("dot").addEventListener("click", (e) => {
+document.getElementsById("dot").addEventListener("click", (e) => {
     const target = e.target
     
     target.classList.add("colored-red-dot")
