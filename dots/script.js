@@ -40,14 +40,19 @@ function chooseDot(target, dotNum){
         countShaded+=1
     }
     if(countShaded==2){
-        return
+        if(currentPlayer == "blue"){
+            currentPlayer = "red"
+        }
+        else{
+            currentPlayer = "blue"
+        }
     }
 }
 
 for (var i = 0; i < elements.length; i++) {
     elements[i].addEventListener('click', (e) => {
         const target = e.target
-        console.log(i)
+        console.log(target)
     });
 }
 
