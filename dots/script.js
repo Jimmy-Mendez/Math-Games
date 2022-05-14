@@ -19,7 +19,7 @@ initBoard();
 
 document.getElementsById("dot").addEventListener("click", (e) => {
     const target = e.target
-    
+    console.log("hi")
     target.classList.add("colored-red-dot")
 })
 
