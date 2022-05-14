@@ -27,6 +27,7 @@ p{
     align-items: center;
     text-transform: uppercase;
     padding: 3px;
+    background-color: white;
   }
   
 .colored-dot-red {
