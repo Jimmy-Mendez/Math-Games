@@ -17,9 +17,19 @@ function initBoard() {
 
 initBoard();
 
-document.getElementsByClassName("dot").addEventListener("click", (e) => {
-    const target = e.target
-    console.log("hi")
-    target.classList.add("colored-red-dot")
-})
+var elements = document.getElementsByClassName("dot");
+
+var changeColor = function() {
+    this.classList.add("colored-red-dot")
+};
+
+for (var i = 0; i < elements.length; i++) {
+    elements[i].addEventListener('click', changeColor, false);
+}
+
+//document.getElementsByClassName("dot").addEventListener("click", (e) => {
+//    const target = e.target
+//    console.log("hi")
+//    target.classList.add("colored-red-dot")
+//})
 
