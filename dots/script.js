@@ -1,5 +1,5 @@
 let currentPlayer = "red"
-let lastShaded = -1
+let lastShaded = -10
 let countShaded = 0
 
 function initBoard() {
@@ -26,7 +26,6 @@ var elements = document.getElementsByClassName("dot");
 function chooseDot(target){
     console.log(currentPlayer)
     let oldColor = target.style.backgroundColor
-    let index = -10
     let dotNum=-1
     for (var i = 0; i < elements.length; i++) {
         if(target == elements[i]){
@@ -36,17 +35,18 @@ function chooseDot(target){
     if (elements[dotNum].style.backgroundColor=='red'){
         elements[dotNum].style.backgroundColor='white'
         countShaded-=1
+        lastShaded = -10
     }
     else if (countShaded==0 || dotNum == lastShaded+6 || dotNum == lastShaded-6 || dotNum == lastShaded+1 || dotNum == lastShaded-1){
         elements[dotNum].style.backgroundColor='red'
-        lastShaded == dotNum
+        lastShaded = dotNum
         countShaded+=1
         console.log('case2')
     }
     else {
             elements[lastShaded].style.backgroundColor='white'
             elements[dotNum].style.backgroundColor='red'
-            lastShaded==dotNum
+            lastShaded=dotNum
         console.log('case3')
     }
     if(countShaded==2){
