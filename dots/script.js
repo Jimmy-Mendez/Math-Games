@@ -30,12 +30,12 @@ function chooseDot(target){
         if(elements[i].style.backgroundColor!='white'){
             index = i
             countShaded += 1
-            if(target == elements[i]){
-                dotNum=i
-                }
+            }
+        if(target == elements[i]){
+            dotNum=i
             }
         }
-    if (dotNum != index+6 && dotNum != index-6 && dotNum != index+1 &&dotNum != index-1 && countShaded == 0){
+    if (dotNum != index+6 && dotNum != index-6 && dotNum != index+1 &&dotNum != index-1 && countShaded == 1){
             elements[index].style.backgroundColor='white'
             elements[dotNum].style.backgroundColor='red'
         console.log('case1')
