@@ -42,7 +42,9 @@ function chooseDot(target){
         countShaded+=1
     }
     else {
+        if(lastShaded!=-10){
             elements[lastShaded].style.backgroundColor='white'
+            }
             elements[dotNum].style.backgroundColor=currentPlayer
             lastShaded=dotNum
     }
