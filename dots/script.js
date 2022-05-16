@@ -35,7 +35,7 @@ function chooseDot(target){
             dotNum=i
             }
         }
-    if (elements[dotNum].style.backgroundColor!='red'){
+    if (elements[dotNum].style.backgroundColor=='red'){
         elements[dotNum].style.backgroundColor='white'
     }
     else if (dotNum != index+6 && dotNum != index-6 && dotNum != index+1 &&dotNum != index-1 && countShaded == 1){
