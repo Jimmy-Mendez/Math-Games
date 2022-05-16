@@ -1,6 +1,8 @@
 let currentPlayer = "red"
 let lastShaded = -10
 let countShaded = 0
+let permanent = []
+let move = []
 
 function initBoard() {
     let board = document.getElementById("game-board");
@@ -31,24 +33,31 @@ function chooseDot(target){
             dotNum=i
             }
         }
-    if (elements[dotNum].style.backgroundColor==currentPlayer){
-        elements[dotNum].style.backgroundColor='white'
-        countShaded-=1
-        lastShaded = -10
-    }
-    else if (countShaded==0 || dotNum == lastShaded+6 || dotNum == lastShaded-6 || dotNum == lastShaded+1 || dotNum == lastShaded-1){
-        elements[dotNum].style.backgroundColor=currentPlayer
-        lastShaded = dotNum
-        countShaded+=1
-    }
-    else {
-        if(lastShaded!=-10){
-            elements[lastShaded].style.backgroundColor='white'
-            }
+    if(!permanent.includes(dotNum){
+        if (elements[dotNum].style.backgroundColor==currentPlayer){
+            elements[dotNum].style.backgroundColor='white'
+            move.pop()
+            countShaded-=1
+            lastShaded = -10
+        }
+        else if (countShaded==0 || dotNum == lastShaded+6 || dotNum == lastShaded-6 || dotNum == lastShaded+1 || dotNum == lastShaded-1){
             elements[dotNum].style.backgroundColor=currentPlayer
-            lastShaded=dotNum
+            lastShaded = dotNum
+            countShaded+=1
+            move.push(dotNum)
+        }
+        else {
+            if(lastShaded!=-10){
+                elements[lastShaded].style.backgroundColor='white'
+                }
+                elements[dotNum].style.backgroundColor=currentPlayer
+                lastShaded=dotNum
+                move.pop()
+                move.push(dotNum)
+            }
     }
     if(countShaded==2){
+        permanent.concat(move)
         if(currentPlayer == "blue"){
             currentPlayer = "red"
         }
