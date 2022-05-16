@@ -36,12 +36,12 @@ function chooseDot(target){
             }
         }
     if (dotNum != index+6 && dotNum != index-6 && dotNum != index+1 &&dotNum != index-1 && countShaded == 0){
-            elements[index].backgroundColor='white'
-            elements[dotNum].backgroundColor='red'
+            elements[index].style.backgroundColor='white'
+            elements[dotNum].style.backgroundColor='red'
         console.log('case1')
     }
     else{
-        elements[dotNum].backgroundColor='red'
+        elements[dotNum].style.backgroundColor='red'
         countShaded+=1
         console.log('case2')
     }
