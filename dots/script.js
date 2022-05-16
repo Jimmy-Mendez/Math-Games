@@ -24,7 +24,7 @@ var elements = document.getElementsByClassName("dot");
 function chooseDot(target){
     let oldColor = target.style.backgroundColor
     let index = -1
-    countShaded = 0
+    let countShaded = 0
     dotNum=-1
     for (var i = 0; i < elements.length; i++) {
         if(elements[i].backgroundColor!='white'){
