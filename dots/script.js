@@ -56,6 +56,7 @@ function chooseDot(target){
         else{
             currentPlayer = "blue"
         }
+        countShaded=0
     }
 }
 
