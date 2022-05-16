@@ -24,7 +24,6 @@ initBoard();
 var elements = document.getElementsByClassName("dot");
 
 function chooseDot(target){
-    console.log(currentPlayer)
     let oldColor = target.style.backgroundColor
     let dotNum=-1
     for (var i = 0; i < elements.length; i++) {
@@ -32,22 +31,20 @@ function chooseDot(target){
             dotNum=i
             }
         }
-    if (elements[dotNum].style.backgroundColor=='red'){
+    if (elements[dotNum].style.backgroundColor==currentPlayer){
         elements[dotNum].style.backgroundColor='white'
         countShaded-=1
         lastShaded = -10
     }
     else if (countShaded==0 || dotNum == lastShaded+6 || dotNum == lastShaded-6 || dotNum == lastShaded+1 || dotNum == lastShaded-1){
-        elements[dotNum].style.backgroundColor='red'
+        elements[dotNum].style.backgroundColor=currentPlayer
         lastShaded = dotNum
         countShaded+=1
-        console.log('case2')
     }
     else {
             elements[lastShaded].style.backgroundColor='white'
-            elements[dotNum].style.backgroundColor='red'
+            elements[dotNum].style.backgroundColor=currentPlayer
             lastShaded=dotNum
-        console.log('case3')
     }
     if(countShaded==2){
         if(currentPlayer == "blue"){
@@ -57,6 +54,7 @@ function chooseDot(target){
             currentPlayer = "blue"
         }
         countShaded=0
+        lastShaded = -10
     }
 }
 
