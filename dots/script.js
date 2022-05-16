@@ -23,7 +23,7 @@ var elements = document.getElementsByClassName("dot");
 
 function chooseDot(target){
     let oldColor = target.style.backgroundColor
-    let index = -1
+    let index = -10
     let countShaded = 0
     let dotNum=-1
     for (var i = 0; i < elements.length; i++) {
@@ -38,10 +38,12 @@ function chooseDot(target){
     if (dotNum != index+6 && dotNum != index-6 && dotNum != index+1 &&dotNum != index-1 && countShaded == 0){
             elements[index].backgroundColor='white'
             elements[dotNum].backgroundColor='red'
+        console.log('case1')
     }
     else{
         elements[dotNum].backgroundColor='red'
         countShaded+=1
+        console.log('case2')
     }
     if(countShaded==2){
         if(currentPlayer == "blue"){
