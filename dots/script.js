@@ -22,6 +22,7 @@ initBoard();
 var elements = document.getElementsByClassName("dot");
 
 function chooseDot(target){
+    console.log(currentPlayer)
     let oldColor = target.style.backgroundColor
     let index = -10
     let countShaded = 0
