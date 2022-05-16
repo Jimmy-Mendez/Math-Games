@@ -1,4 +1,6 @@
 let currentPlayer = "red"
+let lastShaded = -1
+let countShaded = 0
 
 function initBoard() {
     let board = document.getElementById("game-board");
@@ -25,29 +27,27 @@ function chooseDot(target){
     console.log(currentPlayer)
     let oldColor = target.style.backgroundColor
     let index = -10
-    let countShaded = 0
     let dotNum=-1
     for (var i = 0; i < elements.length; i++) {
-        if(elements[i].style.backgroundColor!='white'){
-            index = i
-            countShaded += 1
-            }
         if(target == elements[i]){
             dotNum=i
             }
         }
     if (elements[dotNum].style.backgroundColor=='red'){
         elements[dotNum].style.backgroundColor='white'
+        countShaded-=1
     }
-    else if (dotNum != index+6 && dotNum != index-6 && dotNum != index+1 && dotNum != index-1){
-            elements[index].style.backgroundColor='white'
-            elements[dotNum].style.backgroundColor='red'
-        console.log('case1')
-    }
-    else{
+    else if (countShaded==0 || dotNum == lastShaded+6 || dotNum == lastShaded-6 || dotNum == lastShaded+1 || dotNum == lastShaded-1){
         elements[dotNum].style.backgroundColor='red'
+        lastShaded == dotNum
         countShaded+=1
         console.log('case2')
+    }
+    else {
+            elements[lastShaded].style.backgroundColor='white'
+            elements[dotNum].style.backgroundColor='red'
+            lastShaded==dotNum
+        console.log('case3')
     }
     if(countShaded==2){
         if(currentPlayer == "blue"){
