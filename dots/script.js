@@ -96,7 +96,6 @@ function chooseDot(target){
                move.pop()
                move.push(dotNum)
            }
-   }
    if(move.length==2){
        elements[move[0]].style.backgroundColor='white'
        elements[move[1]].style.backgroundColor='white'
