@@ -27,7 +27,7 @@ function chooseDot(target){
     let countShaded = 0
     let dotNum=-1
     for (var i = 0; i < elements.length; i++) {
-        if(elements[i].backgroundColor!='white'){
+        if(elements[i].style.backgroundColor!='white'){
             index = i
             countShaded += 1
             if(target == elements[i]){
@@ -62,19 +62,4 @@ for (var i = 0; i < elements.length; i++) {
     });
 }
 
-
-//for (var i = 0; i < elements.length; i++) {
-//    elements[i].addEventListener('click', (e) => {
-//        const target = e.target
-//        let oldColor = target.style.backgroundColor
-//        if (currentPlayer == "red"){
-//            if (oldColor == 'red'){
-//                target.style.backgroundColor =  'white'
-//            }
-//            else{
-//                target.style.backgroundColor =  'red'
-//            }
-//        }
-//    });
-//}
 
