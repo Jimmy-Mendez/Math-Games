@@ -90,10 +90,10 @@ function chooseDot(target){
        else {
            if(lastShaded!=-10){
                elements[lastShaded].style.backgroundColor='white'
+               move.pop()
                }
                elements[dotNum].style.backgroundColor='black'
                lastShaded=dotNum
-               move.pop()
                move.push(dotNum)
            }
    if(move.length==2){
