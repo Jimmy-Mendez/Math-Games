@@ -1,7 +1,7 @@
 let currentPlayer = "red"
 let lastShaded = -10
 let countShaded = 0
-let permanent = []
+let lines = []
 let move = []
 
 function initBoard() {
@@ -24,49 +24,6 @@ function initBoard() {
 initBoard();
 
 var elements = document.getElementsByClassName("dot");
-
-//function chooseDot(target){
-//    let dotNum=-1
-//    for (var i = 0; i < elements.length; i++) {
-//        if(target == elements[i]){
-//            dotNum=i
-//            }
-//        }
-//    if(!permanent.includes(dotNum){
-//        if (elements[dotNum].style.backgroundColor==currentPlayer){
-//            elements[dotNum].style.backgroundColor='white'
-//            move.pop()
-//            countShaded-=1
-//            lastShaded = -10
-//        }
-//        else if (countShaded==0 || dotNum == lastShaded+6 || dotNum == lastShaded-6 || dotNum == lastShaded+1 || dotNum == lastShaded-1){
-//            elements[dotNum].style.backgroundColor=currentPlayer
-//            lastShaded = dotNum
-//            countShaded+=1
-//            move.push(dotNum)
-//        }
-//        else {
-//            if(lastShaded!=-10){
-//                elements[lastShaded].style.backgroundColor='white'
-//                }
-//                elements[dotNum].style.backgroundColor=currentPlayer
-//                lastShaded=dotNum
-//                move.pop()
-//                move.push(dotNum)
-//            }
-//    }
-//    if(countShaded==2){
-//        permanent.concat(move)
-//        if(currentPlayer == "blue"){
-//            currentPlayer = "red"
-//        }
-//        else{
-//            currentPlayer = "blue"
-//        }
-//        countShaded=0
-//        lastShaded = -10
-//    }
-//}
        
 function chooseDot(target){
    let dotNum=-1
@@ -97,12 +54,14 @@ function chooseDot(target){
                move.push(dotNum)
            }
    if(countShaded==2){
-       elements[move[move.length-1]].style.backgroundColor='white'
-       elements[move[move.length-2]].style.backgroundColor='white'
+       elements[move[0]].style.backgroundColor='white'
+       elements[move[1]].style.backgroundColor='white'
+       lines.push(move)
+       move = []
        countShaded = 0
        lastShaded=-10
        console.log(move)
-       console.log('draw the line')
+       console.log(line)
    }
 }
        
