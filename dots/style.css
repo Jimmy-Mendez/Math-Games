@@ -34,8 +34,14 @@ p{
     display: flex;
   }
 
-#line{
+#red-line{
     position:absolute;
     width:1px;
     background-color:red;
+  }  
+
+#blue-line{
+    position:absolute;
+    width:1px;
+    background-color:blue;
   }  

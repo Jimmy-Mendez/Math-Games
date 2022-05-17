@@ -62,8 +62,10 @@ function adjustLine(from, to, line){
     line.style.left   = left+'px';
     line.style.height = H + 'px';
   }
+  
 
 function chooseDot(target){
+   let lines_div = document.getElementById("lines");
    let dotNum=-1
    for (var i = 0; i < elements.length; i++) {
        if(target == elements[i]){
@@ -92,6 +94,15 @@ function chooseDot(target){
                move.push(dotNum)
            }
    if(countShaded==2){
+        let line = document.createElement("div")
+        if(currentPlayer=="blue")
+        {
+            line.className = "blue-line"
+        }
+        else{
+            line.className = "red-line"
+        }
+        lines_div.appendChild(line)
         adjustLine(
             elements[move[0]], 
             elements[move[1]],
