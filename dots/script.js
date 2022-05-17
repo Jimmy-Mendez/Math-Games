@@ -97,9 +97,11 @@ function chooseDot(target){
         let line = document.createElement("div")
         if(currentPlayer=="blue")
         {
+            currentPlayer="red"
             line.className = "blue-line"
         }
         else{
+            currentPlayer="blue"
             line.className = "red-line"
         }
         lines_div.appendChild(line)
