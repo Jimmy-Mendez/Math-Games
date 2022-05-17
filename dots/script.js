@@ -97,8 +97,8 @@ function chooseDot(target){
                move.push(dotNum)
            }
    if(countShaded==2){
-       elements[move[0]].style.backgroundColor='white'
-       elements[move[1]].style.backgroundColor='white'
+       elements[move[move.length-1]].style.backgroundColor='white'
+       elements[move[move.length-2]].style.backgroundColor='white'
        countShaded = 0
        lastShaded=-10
        console.log(move)
