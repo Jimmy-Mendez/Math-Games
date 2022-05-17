@@ -94,18 +94,16 @@ function chooseDot(target){
                move.push(dotNum)
            }
    if(countShaded==2){
-       if(lines.contains(move)){
+       if(lines.includes(move)){
             toastr.error("Already an existing line!")
             return
        }
         let line = document.createElement("div")
         if(currentPlayer=="blue")
         {
-            currentPlayer="red"
             line.className = "blue-line"
         }
         else{
-            currentPlayer="blue"
             line.className = "red-line"
         }
         lines_div.appendChild(line)
