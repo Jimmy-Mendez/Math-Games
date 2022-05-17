@@ -101,6 +101,7 @@ function chooseDot(target){
        elements[move[1]].style.backgroundColor='white'
        countShaded = 0
        lastShaded=-10
+       console.log(move)
        console.log('draw the line')
    }
 }
