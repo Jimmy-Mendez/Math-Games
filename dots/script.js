@@ -94,6 +94,10 @@ function chooseDot(target){
                move.push(dotNum)
            }
    if(countShaded==2){
+       if(lines.contains(move)){
+            toastr.error("Already an existing line!")
+            return
+       }
         let line = document.createElement("div")
         if(currentPlayer=="blue")
         {

@@ -34,13 +34,13 @@ p{
     display: flex;
   }
 
-#red-line{
+.red-line{
     position:absolute;
     width:1px;
     background-color:red;
   }  
 
-#blue-line{
+.blue-line{
     position:absolute;
     width:1px;
     background-color:blue;
