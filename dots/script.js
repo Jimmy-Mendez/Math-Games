@@ -114,11 +114,11 @@ function chooseDot(target){
       );
        elements[move[0]].style.backgroundColor='white'
        elements[move[1]].style.backgroundColor='white'
+       console.log(move)
        lines.push(move)
        move = []
        countShaded = 0
        lastShaded=-10
-       console.log(move)
        console.log(lines)
    }
 }
