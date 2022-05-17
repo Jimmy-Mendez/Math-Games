@@ -78,7 +78,7 @@ function chooseDot(target){
        if (elements[dotNum].style.backgroundColor=='black'){
            elements[dotNum].style.backgroundColor='white'
            move.pop()
-           countShaded-=1
+           countShaded=0
            lastShaded = -10
        }
        else if (countShaded==0 || dotNum == lastShaded+6 || dotNum == lastShaded-6 || dotNum == lastShaded+1 || dotNum == lastShaded-1){
