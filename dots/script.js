@@ -99,6 +99,7 @@ function chooseDot(target){
    if(move.length==2){
        elements[move[0]].style.backgroundColor='white'
        elements[move[1]].style.backgroundColor='white'
+       countShaded = 0
        console.log('draw the line')
    }
 }
