@@ -106,7 +106,7 @@ function chooseDot(target){
         adjustLine(
             elements[move[0]], 
             elements[move[1]],
-            document.getElementById('line')
+            line
       );
        elements[move[0]].style.backgroundColor='white'
        elements[move[1]].style.backgroundColor='white'
