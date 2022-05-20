@@ -202,11 +202,13 @@ function chooseDot(target){
             return a - b;
           });
    if(countShaded==2){
-       if(lines.indexOf(move) !== -1){
-           console.log("it works")
-            toastr.error("Already an existing line!")
-            return
-       }
+        for(var i = 0; i < lines.length; i++){
+            if(console.log(lines[i][0]==move[0])&&console.log(lines[i][1]==move[1]))
+            {
+                toastr.error("Already an existing line!")
+                return
+            }
+        }
         let line = document.createElement("div")
         if(currentPlayer=="blue")
         {
