@@ -64,6 +64,111 @@ function adjustLine(from, to, line){
   }
   
 
+function checkBox(coords){
+    let numBoxes = 0
+    //Box 1
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+    //Box 2
+    if(coords.includes([1,2])&&coords.includes([1,7])&&coords.includes([2,8])&&coords.includes([7,8])){
+        numBoxes+=1
+    }
+    //Box 3
+    if(coords.includes([2,3])&&coords.includes([2,8])&&coords.includes([3,9])&&coords.includes([8,9])){
+        numBoxes+=1
+    }
+    //Box 4
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+    //Box 5
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+    //Box 6
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+    //Box 7
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+    //Box 8
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+    //Box 9
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+    //Box 10
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+    //Box 11
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+    //Box 12
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+    //Box 13
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+    //Box 14
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+    //Box 15
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+    //Box 16
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+    //Box 17
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+    //Box 18
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+    //Box 19
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+    //Box 20
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+    //Box 21
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+    //Box 22
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+    //Box 23
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+    //Box 24
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+    //Box 25
+    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
+        numBoxes+=1
+    }
+
+}
+
 function chooseDot(target){
    let lines_div = document.getElementById("lines");
    let dotNum=-1
@@ -97,7 +202,7 @@ function chooseDot(target){
             return a - b;
           });
    if(countShaded==2){
-       if(lines.includes(move)){
+       if(lines.indexOf(move) !== -1){
            console.log("it works")
             toastr.error("Already an existing line!")
             return
