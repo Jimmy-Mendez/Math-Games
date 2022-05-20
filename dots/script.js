@@ -203,7 +203,7 @@ function chooseDot(target){
           });
    if(countShaded==2){
         for(var i = 0; i < lines.length; i++){
-            if(console.log(lines[i][0]==move[0])&&console.log(lines[i][1]==move[1]))
+            if(lines[i][0]==move[0]&&lines[i][1]==move[1])
             {
                 toastr.error("Already an existing line!")
                 return
