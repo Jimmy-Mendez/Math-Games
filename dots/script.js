@@ -93,8 +93,12 @@ function chooseDot(target){
                lastShaded=dotNum
                move.push(dotNum)
            }
+        move.sort(function(a, b) {
+            return a - b;
+          });
    if(countShaded==2){
        if(lines.includes(move)){
+           console.log("it works")
             toastr.error("Already an existing line!")
             return
        }
