@@ -10,8 +10,8 @@ function load(){
 	turn = true;
 	you = 0;
 	comp = 0;
-	var m = 10;
-	var n = 10;
+	var m = 5;
+	var n = 5;
 	var offset = 50;
 
 	var sx= sx = window.innerWidth/2 - (m*offset)/2,
