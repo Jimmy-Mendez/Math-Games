@@ -1,245 +1,227 @@
-let currentPlayer = "red"
-let lastShaded = -10
-let countShaded = 0
-let lines = []
-let move = []
+class App extends React.Component {
 
-function initBoard() {
-    let board = document.getElementById("game-board");
-
-    for (let i = 0; i < 6; i++) {
-        let row = document.createElement("div")
-        row.className = "number-row"
-        
-        for (let j = 0; j < 6; j++) {
-            let dot = document.createElement("div")
-            dot.className = "dot"
-            row.appendChild(dot)
+    constructor(props) {
+      super(props)
+      this.state = this.initialBoard(5)
+    }
+  
+    initialBoard = (size) => {
+      let state = {boardSize: size,
+      numRed: 0,
+      numBlue: 0,
+      turn: "red",
+      winMessage: "",
+      lineCoordinates: {},
+      boxColors: {}
+    }
+    for (let i=0; i<2; i++){
+      for (let j=0; j<state.boardSize+1; j++) {
+        for (let k=0; k<state.boardSize; k++) {
+          state.lineCoordinates[i+","+j+","+k]=0
         }
-
-        board.appendChild(row)
+      }
     }
-}
-
-initBoard();
-
-var elements = document.getElementsByClassName("dot");
-    
-function adjustLine(from, to, line){
-
-    var fT = from.offsetTop  + from.offsetHeight/2;
-    var tT = to.offsetTop    + to.offsetHeight/2;
-    var fL = from.offsetLeft + from.offsetWidth/2;
-    var tL = to.offsetLeft   + to.offsetWidth/2;
-    
-    var CA   = Math.abs(tT - fT);
-    var CO   = Math.abs(tL - fL);
-    var H    = Math.sqrt(CA*CA + CO*CO);
-    var ANG  = 180 / Math.PI * Math.acos( CA/H );
-  
-    if(tT > fT){
-        var top  = (tT-fT)/2 + fT;
-    }else{
-        var top  = (fT-tT)/2 + tT;
+    for (let i=0; i< state.boardSize; i++) {
+      for (let j=0; j< state.boardSize; j++) {
+        state.boxColors[i+","+j] = "rgb(255,255,255)"
+      }
     }
-    if(tL > fL){
-        var left = (tL-fL)/2 + fL;
-    }else{
-        var left = (fL-tL)/2 + tL;
-    }
-  
-    if(( fT < tT && fL < tL) || ( tT < fT && tL < fL) || (fT > tT && fL > tL) || (tT > fT && tL > fL)){
-      ANG *= -1;
-    }
-    top-= H/2;
-  
-    line.style["-webkit-transform"] = 'rotate('+ ANG +'deg)';
-    line.style["-moz-transform"] = 'rotate('+ ANG +'deg)';
-    line.style["-ms-transform"] = 'rotate('+ ANG +'deg)';
-    line.style["-o-transform"] = 'rotate('+ ANG +'deg)';
-    line.style["-transform"] = 'rotate('+ ANG +'deg)';
-    line.style.top    = top+'px';
-    line.style.left   = left+'px';
-    line.style.height = H + 'px';
+    return state
   }
   
-
-function checkBox(coords){
-    let numBoxes = 0
-    //Box 1
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
+    fillLine = (event) => {
+      var currentCoord=event.target.dataset.coord
+      if (this.state.lineCoordinates[currentCoord] === 0) {
+        //event.target.style.backgroundColor =  this.state.turn
+        let newState=this.state.lineCoordinates
+        newState[currentCoord] = this.state.turn === "red"? 1 : -1
+        this.setState(prevState => ({
+          lineCoordinates: newState,
+        }))
+  
+        var splitCoord=currentCoord.split(',')
+        var i = splitCoord[0]
+        var j = splitCoord[1]
+        var k = splitCoord[2]
+  
+        let newBoxColors = this.state.boxColors
+  
+        var madeSquare = 0
+  
+        if (i === "0") {
+          if (this.checkSquare(j,k) === 4) {
+            madeSquare = 1
+            newBoxColors[j+','+k] =  (this.state.turn ==="red") ? "rgba(255,0,0,0.5)" : "rgba(0,0,255,0.5)"
+            this.setState((prevState)=>({
+              numRed: (prevState.turn ==="red") ? prevState.numRed+1 : prevState.numRed,
+              numBlue: (prevState.turn ==="blue") ? prevState.numBlue+1 : prevState.numBlue,
+              boxColors: newBoxColors,
+            }))
+          }
+          if (this.checkSquare(parseFloat(j)-1,k) === 4) {
+            madeSquare = 1
+            newBoxColors[(parseFloat(j)-1)+','+k] = (this.state.turn ==="red") ? "rgba(255,0,0,0.5)" : "rgba(0,0,255,0.5)"
+            this.setState((prevState)=>({
+              numRed: (prevState.turn ==="red") ? prevState.numRed+1 : prevState.numRed,
+              numBlue: (prevState.turn ==="blue") ? prevState.numBlue+1 : prevState.numBlue,
+              boxColors: newBoxColors,
+            }))
+          }
+        } else {
+          if (this.checkSquare(k,j) === 4) {
+            madeSquare = 1
+            newBoxColors[k+','+j] = (this.state.turn ==="red") ? "rgba(255,0,0,0.5)" : "rgba(0,0,255,0.5)"
+            this.setState((prevState)=>({
+              numRed: (prevState.turn ==="red") ? prevState.numRed+1 : prevState.numRed,
+              numBlue: (prevState.turn ==="blue") ? prevState.numBlue+1 : prevState.numBlue,
+              boxColors: newBoxColors,
+            }))
+          }
+          if (this.checkSquare(k,parseFloat(j)-1) === 4) {
+            madeSquare = 1
+            newBoxColors[k+','+(parseFloat(j)-1)] = (this.state.turn ==="red") ? "rgba(255,0,0,0.5)" : "rgba(0,0,255,0.5)"
+            this.setState((prevState)=>({
+              numRed: (prevState.turn ==="red") ? prevState.numRed+1 : prevState.numRed,
+              numBlue: (prevState.turn ==="blue") ? prevState.numBlue+1 : prevState.numBlue,
+              boxColors: newBoxColors,
+            }))
+          }
+        }
+        if (madeSquare === 0) {
+          this.setState((prevState)=> ({
+            turn: prevState.turn === "red" ? "blue" : "red",
+          }))
+        } else {
+          this.checkGameOver()
+        }
+      }
     }
-    //Box 2
-    if(coords.includes([1,2])&&coords.includes([1,7])&&coords.includes([2,8])&&coords.includes([7,8])){
-        numBoxes+=1
+  
+    checkSquare = (j,k) => {
+      var checker1 = Math.abs(this.state.lineCoordinates['0,'+j+','+k])
+      var checker2 = Math.abs(((parseFloat(j)+1))>this.state.boardSize ? 0 : this.state.lineCoordinates['0,'+(parseFloat(j)+1)+','+k])
+      var checker3 = Math.abs(this.state.lineCoordinates['1,'+k+','+j])
+      var checker4 = Math.abs(((parseFloat(k)+1))>this.state.boardSize ? 0 : this.state.lineCoordinates['1,'+(parseFloat(k)+1)+','+j])
+      return checker1+checker2+checker3+checker4
     }
-    //Box 3
-    if(coords.includes([2,3])&&coords.includes([2,8])&&coords.includes([3,9])&&coords.includes([8,9])){
-        numBoxes+=1
+  
+    checkGameOver = () => {
+      this.setState((prevState) =>   ({
+        winMessage: (prevState.numRed+prevState.numBlue == prevState.boardSize**2)? this.makeWinMessage(prevState) : ""
+      }))
     }
-    //Box 4
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
+  
+    makeWinMessage = (state) => {
+      var winMessage
+        if (state.numRed > state.numBlue) {
+          winMessage = "Red wins! Select a board size to start a new game."
+        } else if (state.numRed < state.numBlue) {
+          winMessage = "Blue wins! Select a board size to start a new game."
+        } else {
+          winMessage = "Draw! Select a board size to start a new game."
+        }
+        return (winMessage)
     }
-    //Box 5
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
+  
+    changeBoardSize = (event) => {
+      if (window.confirm('Are you sure you would like to start a new game?')){
+        var newState
+        if (event.target.id === "small") {
+          newState = this.initialBoard(5)
+        } else if (event.target.id === "medium") {
+          newState = this.initialBoard(8)
+        } else if (event.target.id === "large") {
+          newState = this.initialBoard(11)
+        }
+        this.setState((prevState)=> newState)
+      }
     }
-    //Box 6
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
+  
+    selectColor = (int) => {
+      if (int===0) {
+        return ("rgb(255,255,255)")
+      } else if (int===1) {
+        return ("rgb(255,0,0)")
+      } else if (int===-1) {
+        return ("rgb(0,0,255)")
+      }
     }
-    //Box 7
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
+  
+    tint = (event) => {
+      var currentCoord=event.target.dataset.coord
+      if (this.state.lineCoordinates[currentCoord] === 0) {
+          if (this.state.turn === "red") {
+            event.target.style.backgroundColor = "rgba(255,0,0,0.5)"
+          } else {
+            event.target.style.backgroundColor = "rgba(0,0,255,0.5)"
+          }
+      }
     }
-    //Box 8
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
+  
+    untint = (event) => {
+      var currentCoord=event.target.dataset.coord
+      if (this.state.lineCoordinates[currentCoord] === 0) {
+        event.target.style.backgroundColor = "rgb(255,255,255)"
+      }
     }
-    //Box 9
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
-    }
-    //Box 10
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
-    }
-    //Box 11
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
-    }
-    //Box 12
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
-    }
-    //Box 13
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
-    }
-    //Box 14
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
-    }
-    //Box 15
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
-    }
-    //Box 16
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
-    }
-    //Box 17
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
-    }
-    //Box 18
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
-    }
-    //Box 19
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
-    }
-    //Box 20
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
-    }
-    //Box 21
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
-    }
-    //Box 22
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
-    }
-    //Box 23
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
-    }
-    //Box 24
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
-    }
-    //Box 25
-    if(coords.includes([0,1])&&coords.includes([0,6])&&coords.includes([1,7])&&coords.includes([6,7])){
-        numBoxes+=1
-    }
-
-}
-
-function chooseDot(target){
-   let lines_div = document.getElementById("lines");
-   let dotNum=-1
-   for (var i = 0; i < elements.length; i++) {
-       if(target == elements[i]){
-           dotNum=i
-           }
-       }
-       if (elements[dotNum].style.backgroundColor=='black'){
-           elements[dotNum].style.backgroundColor='white'
-           move.pop()
-           countShaded=0
-           lastShaded = -10
-       }
-       else if (countShaded==0 || dotNum == lastShaded+6 || dotNum == lastShaded-6 || dotNum == lastShaded+1 || dotNum == lastShaded-1){
-           elements[dotNum].style.backgroundColor='black'
-           lastShaded = dotNum
-           countShaded+=1
-           move.push(dotNum)
-       }
-       else {
-           if(lastShaded!=-10){
-               elements[lastShaded].style.backgroundColor='white'
-               move.pop()
-               }
-               elements[dotNum].style.backgroundColor='black'
-               lastShaded=dotNum
-               move.push(dotNum)
-           }
-        move.sort(function(a, b) {
-            return a - b;
-          });
-   if(countShaded==2){
-        for(var i = 0; i < lines.length; i++){
-            if(lines[i][0]==move[0]&&lines[i][1]==move[1])
-            {
-                toastr.error("Already an existing line!")
-                return
+  
+    makeBoard = (boardSize) => {
+      var cols=[];
+      for (let i=0; i<=2*boardSize; i++) {
+        var row=[]
+        for (let j=0; j<=2*boardSize; j++) {
+          if (i%2 === 0) {
+            if (j%2 ===0) {
+              row.push(React.createElement("div",
+              {className: "dot", id: "dot"+Math.floor(i/2)+","+Math.floor(j/2)}
+              ,""))
+            } else {
+              row.push(React.createElement("div"
+                , {className: "horizContainer", "data-coord":"0,"+Math.floor(i/2)+ "," +Math.floor(j/2)
+                , onClick:this.fillLine, style:{backgroundColor: this.selectColor(this.state.lineCoordinates["0,"+Math.floor(i/2)+ "," +Math.floor(j/2)])}
+                , onMouseEnter:this.tint, onMouseLeave:this.untint}
+                , ""))
             }
+          } else {
+            if (j%2 === 0) {
+              row.push(React.createElement("div"
+                ,{className: "vertContainer","data-coord":"1,"+Math.floor(j/2)+ "," +Math.floor(i/2)
+                , onClick:this.fillLine, style:{backgroundColor: this.selectColor(this.state.lineCoordinates["1,"+Math.floor(j/2)+ "," +Math.floor(i/2)])}
+                , onMouseEnter:this.tint, onMouseLeave:this.untint}
+                ,""))
+            } else {
+              row.push(React.createElement("div"
+                ,{className: "box", id: "box"+Math.floor(i/2)+','+Math.floor(j/2), style: {backgroundColor: this.state.boxColors[Math.floor(i/2)+','+Math.floor(j/2)]}}
+                ,""))
+  
+            }
+          }
         }
-        let line = document.createElement("div")
-        if(currentPlayer=="blue")
-        {
-            line.className = "blue-line"
-        }
-        else{
-            line.className = "red-line"
-        }
-        lines_div.appendChild(line)
-        adjustLine(
-            elements[move[0]], 
-            elements[move[1]],
-            line
+        cols.push(React.createElement("div",{className:"row"},row))
+      }
+  
+      return (React.createElement("div",{id:"game-board"},cols))
+    }
+  
+    render() {
+      return (
+        <div id="game">
+          <div id="header">
+            <h1 id="welcome">Dots &amp; Boxes </h1>
+            <p id="score"> Red:{this.state.numRed} Blue:{this.state.numBlue} </p>
+            Board size :
+            <button id= "small" onClick={this.changeBoardSize}> 5x5 </button>
+            <button id="medium" onClick={this.changeBoardSize}> 8x8 </button>
+            <button id="large" onClick={this.changeBoardSize}> 11x11 </button>
+            <p id="winner"> {this.state.winMessage} </p>
+          </div>
+          <div id="board">
+            {this.makeBoard(this.state.boardSize)}
+          </div>
+        </div>
       );
-       elements[move[0]].style.backgroundColor='white'
-       elements[move[1]].style.backgroundColor='white'
-       console.log(move)
-       lines.push(move)
-       move = []
-       countShaded = 0
-       lastShaded=-10
-       console.log(lines)
-   }
-}
-
-
-for (var i = 0; i < elements.length; i++) {
-    elements[i].addEventListener('click', (e) => {
-        const target = e.target
-        chooseDot(target)
-    });
-}
-
-
+    }
+  }
+  
+  ReactDOM.render(<App/>,document.getElementById('root'))
+  
