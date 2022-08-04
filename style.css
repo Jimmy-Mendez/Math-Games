@@ -1,0 +1,20 @@
+h2{
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-align: center;
+  }
+p{
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+.image{
+    width:200px;
+}
+.thumbnail-container {
+    padding: 20px;
+}
+.thumbnail{
+    width: 30%;
+    text-align: center;
+    padding: 20px;
+    float: left;
+}
+
