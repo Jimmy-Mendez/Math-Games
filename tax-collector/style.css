@@ -1,0 +1,19 @@
+h2{
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-align: center;
+  }
+
+p{
+    font-family: "Lucida Console", "Courier New", monospace;
+ }
+ .num-container{
+  padding: 20px;
+ }
+ .num{
+    text-align: center;
+    font-weight: bold;
+    width: 5%;
+    text-align: center;
+    padding: 20px;
+    float: left;
+ }
